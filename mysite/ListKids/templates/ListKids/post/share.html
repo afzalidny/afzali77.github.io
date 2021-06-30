@@ -1,0 +1,17 @@
+{% extends "ListKids/base.html" %}
+{% block title %}صفحه به اشتراک گذاری پست ها{% endblock %}
+{% block content %}
+{% if sent %}
+<h1 dir="rtl"> تایید ارسال ایمیل </h1>
+<p dir="rtl" >
+    "{{ posts.title }}" با موفقیت برای {{form.cleaned_data.to }}ارسال شد.
+</p>
+{% else %}
+<h1 dir="rtl">اشتراک گذاری"{{ posts.title }}" توسط e-mail</h1>
+<form method="post" dir="rtl">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="ارسال" dir="rtl">
+</form>
+{% endif %}
+{% endblock %}

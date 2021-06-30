@@ -1,0 +1,60 @@
+{% extends "listKids/base.html" %}
+{% block title %}{{ posts.title }}{% endblock %}
+{% block content %}
+
+<h1 dir="rtl" , align="right">{{ posts.title }}</h1>
+<p class="date" dir="rtl" , align="right">
+   به اشتراک گذاشته شده {{ posts.publish }} توسط {{ posts.user }} - تعداد بازدید:{{posts.visits}}
+</p>
+{% with comments.count as total_comments %}
+<h3 dir="rtl">
+تعداد نظرات :{{ total_comments }} {{ total_comments|pluralize }}
+</h3>
+{% endwith %}
+<p dir="rtl" , align="right">
+   خلاصه:
+   <br />
+<h6 dir="rtl">{{posts.summary|truncatewords:50|linebreaks }}</h6>
+
+</p>
+<hr>
+<p dir ="rtl">
+   <a href="{% url 'ListKids:post_share' posts.id %}" >
+     این نوشته را با دوستانتان به اشتراک بگذارید
+   </a>
+</p>
+<h2 dir="rtl">مطالب مشابه</h2>
+{% for post in similar_posts %}
+ <p dir="rtl">
+ <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+ </p>
+{% empty %}
+<p dir="rtl">درحال حاضر مطالب مشابهی وجود ندارد.</p>
+
+{% endfor %}
+
+<h2 dir="rtl">نظرات</h2>
+
+{% for comment in comments %}
+<div class="comment"dir="rtl">
+   <p class="info" >
+     نظر {{ forloop.counter }}توسط {{ comment.name }}
+      {{ comment.created }}
+   </p>
+   {{ comment.body|linebreaks }}
+</div>
+{% empty %}
+<p dir="rtl">درحال حاضر هیچ نظری وجود ندارد.</p>
+{% endfor %}
+
+{% if new_comment %}
+ <h2 dir="rtl">نظر شما با موفقیت ثبت شد.</h2>
+{% else %}
+ <h2 dir="rtl">افزودن نظر:</h2>
+ <form method="post"dir="rtl">
+ {{ comment_form.as_p }}
+ {% csrf_token %}
+ <p><input type="submit" value="افزودن"></p>
+ </form>
+{% endif %}
+{% endblock %}

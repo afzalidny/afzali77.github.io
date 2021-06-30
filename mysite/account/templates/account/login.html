@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}صفحه ورود{% endblock %}
+{% block content %}
+<h1 dir="rtl">صفحه ورود</h1>
+<p dir="rtl">لطفا برای ورود به سیستم از فرم زیر استفاده کنید:</p>
+<form method="post" dir="rtl" >
+   <p dir="rtl"> {{ form.as_p }}</p>
+    <p dir="rtl">{% csrf_token %}</p>
+    <p dir="rtl"><input type="submit" value="ورود"></p>
+</form>
+{% endblock %}

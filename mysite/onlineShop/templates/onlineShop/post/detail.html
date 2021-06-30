@@ -1,0 +1,16 @@
+{% extends "onlineShop/base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p class="date">
+    Published {{ post.publish }} by {{ post.user }} - visits:{{post.visits}}
+</p>
+<p>
+ خلاصه:
+<br/>
+{{post.summary}}
+</p>
+
+
+{{ post.body|linebreaks }}
+{% endblock %}

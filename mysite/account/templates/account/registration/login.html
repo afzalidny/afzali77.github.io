@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}ورود به حساب کابری{% endblock %}
+{% block content %}
+<h1 dir="rtl">ورود به حساب کابری</h1>
+{% if form.errors %}
+<p dir="rtl">
+    نام کاربری و رمز عبور شما مطابقت نداشت.
+    لطفا دوباره امتحان کنید.
+</p>
+{% else %}
+<p dir="rtl">لطفا از فرم زیر برای ورود به سیستم استفاده کنید. اگر نداري 
+    حساب <a href="{% url "register" %}">از طریق اینجا ثبت نام کنید</a></p>
+{% endif %}
+<div class="login-form" dir="rtl">
+    <form action="{% url 'login' %}" method="post" dir="rtl" >
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}"  dir="rtl"/>
+        <p dir="rtl"><input type="submit" value="Log-in"></p>
+    </form>
+    <p dir="rtl"><a href="{% url "password_reset" %}">رمز عبور خود را فراموش کرده اید?</a></p>
+</div>
+{% endblock %}

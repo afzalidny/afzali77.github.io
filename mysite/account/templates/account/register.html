@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Create an account{% endblock %}
+{% block content %}
+ <h1 dir="rtl">ایجاد حساب کاربری</h1>
+ <p dir="rtl">لطفا با استفاده از فرم زیر نام خود را ثبت نام کنید</p>
+ <form method="post" dir="rtl">
+ {{ user_form.as_p }}
+ {% csrf_token %}
+ <p dir="rtl"><input type="submit" value="Create my account"></p>
+ </form>
+{% endblock %}
